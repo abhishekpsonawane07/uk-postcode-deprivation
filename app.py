@@ -10,36 +10,84 @@ st.set_page_config(
     layout="wide"
 )
 
-# Dark theme styling
 st.markdown("""
     <style>
-    .main { background-color: #0e1117; }
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+           
+    
+    /* Main background */
+    .main { background-color: #0e1117; overflow-x: hidden; }
+    .main .block-container { padding-bottom: 2rem; }
+    
+    /* Hero title responsive */
     .hero-title {
-        font-size: 3.5rem;
+        font-size: clamp(1.8rem, 5vw, 3.5rem);
         font-weight: 800;
         color: #ffffff;
         line-height: 1.2;
         margin-bottom: 0.5rem;
     }
+    
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
         color: #a0aec0;
         margin-bottom: 2rem;
     }
-    .stat-card {
+    
+    /* Stat row — wraps on mobile */
+    .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+    }
+    
+    .stat-number {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: #e53e3e;
+    }
+    
+    .stat-label {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        color: #a0aec0;
+    }
+    
+    /* Report card */
+    .report-card {
+        background: #1a1f2e;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    /* Finding cards */
+    .finding-card {
         background: #1a1f2e;
         border-radius: 12px;
         padding: 1.5rem;
-        border-left: 4px solid #e53e3e;
+        margin-bottom: 1rem;
     }
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #ffffff;
-    }
-    .stat-label {
-        font-size: 0.9rem;
-        color: #a0aec0;
+
+    /* Responsive columns fix */
+    @media (max-width: 640px) {
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+            min-width: 100% !important;
+        }
+        .hero-title {
+            font-size: 1.8rem;
+        }
+        .stat-row {
+            gap: 1rem;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
@@ -56,26 +104,27 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("""
     <div style='padding: 0 2rem 2rem 2rem;'>
-        <div style='display:flex; gap:3rem; margin-top:1rem;'>
-            <div>
-                <div style='font-size:2rem; font-weight:800; color:#e53e3e;'>32,844</div>
-                <div style='color:#a0aec0; font-size:0.85rem;'>Neighbourhoods Analysed</div>
+        <div class='stat-row'>
+            <div class='stat-item'>
+                <div class='stat-number'>32,844</div>
+                <div class='stat-label'>Neighbourhoods Analysed</div>
             </div>
-            <div>
-                <div style='font-size:2rem; font-weight:800; color:#e53e3e;'>317</div>
-                <div style='color:#a0aec0; font-size:0.85rem;'>Local Authorities</div>
+            <div class='stat-item'>
+                <div class='stat-number'>317</div>
+                <div class='stat-label'>Local Authorities</div>
             </div>
-            <div>
-                <div style='font-size:2rem; font-weight:800; color:#e53e3e;'>8x</div>
-                <div style='color:#a0aec0; font-size:0.85rem;'>Deprivation Gap</div>
+            <div class='stat-item'>
+                <div class='stat-number'>8x</div>
+                <div class='stat-label'>Deprivation Gap</div>
             </div>
-            <div>
-                <div style='font-size:2rem; font-weight:800; color:#e53e3e;'>2019</div>
-                <div style='color:#a0aec0; font-size:0.85rem;'>ONS Data</div>
+            <div class='stat-item'>
+                <div class='stat-number'>2019</div>
+                <div class='stat-label'>ONS Data</div>
             </div>
         </div>
     </div>
 """, unsafe_allow_html=True)
+st.caption("💡 Best experienced on desktop for full interactivity.")
 
 # Load data
 @st.cache_data
@@ -232,6 +281,7 @@ with tab2:
     )
 
     st.plotly_chart(fig_map, use_container_width=True)
+    st.caption("💡 For best map experience, view on desktop.")
 
 with tab3:
     st.subheader("💡 What The Data Tells Us")
