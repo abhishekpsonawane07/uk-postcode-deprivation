@@ -64,6 +64,4 @@ streamlit run app.py
 ```
 ---
 Built by Abhishek Sonawane · MSc Data Science
-```
 
----
