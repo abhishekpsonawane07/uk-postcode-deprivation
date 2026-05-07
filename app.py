@@ -89,6 +89,23 @@ st.markdown("""
             gap: 1rem;
         }
     }
+            /* Force dark everywhere — overrides Streamlit's light theme */
+html, body, [data-testid="stApp"], [data-testid="stAppViewContainer"] {
+    background-color: #0e1117 !important;
+    color: #ffffff !important;
+}
+
+[data-testid="stHeader"] {
+    background-color: #0e1117 !important;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #0e1117 !important;
+}
+
+section[data-testid="stMain"] {
+    background-color: #0e1117 !important;
+}
     </style>
 """, unsafe_allow_html=True)
 
