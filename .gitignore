@@ -1,0 +1,20 @@
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb
+
+# Coursework folders
+COURSEWORK/
+COURSEWORK-AND-LAB/
+
+# Excel files
+*.xlsx
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Environment
+.env
